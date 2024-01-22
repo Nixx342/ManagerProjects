@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+require('dotenv').config();
+
 
 const app = express();
 const port = 3000;
@@ -8,20 +10,17 @@ const port = 3000;
 app.use(cors());
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'ProjectManager',
-    password: 'Sze_55gf',
-    port: 5432
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT
 });
 
 pool.on('error', (err) => {
     console.error('Unexpected error on idle client', err);
     process.exit(-1);
 });
-
-const name = 'Name from backend';
-const qwe = 'qwes dghf vbnm juyh  56478 bfghjk';
 
 app.get('/', async (req, res) => {
   try {
