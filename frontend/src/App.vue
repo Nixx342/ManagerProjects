@@ -2,7 +2,7 @@
 import { reactive } from 'vue';
 import axios from 'axios';
 
-let data = reactive({ data: null });
+let data = reactive({ data: [] });
 
 axios.get('http://localhost:3000')
   .then(response => {
