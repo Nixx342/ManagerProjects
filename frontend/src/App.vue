@@ -2,12 +2,12 @@
 import { reactive } from 'vue';
 import axios from 'axios';
 
-let data = reactive();
+let data = reactive({ data: null });
 
 axios.get('http://localhost:3000')
   .then(response => {
     // Обработка успешного ответа
-    data = response.data;
+    data.data = response.data.data;
   })
   .catch(error => {
     // Обработка ошибки
@@ -17,16 +17,13 @@ axios.get('http://localhost:3000')
 
 <template>
   <div>
-    <!-- <h1>{{ data.data }}</h1> -->
-    <!-- // eslint-disable-next-line vue/require-v-for-key -->
-    <div v-for="project in data.data" :key="project.id">
+    <div v-if="!data.data">Загрузка...</div>
+    <div v-else v-for="project in data.data" :key="project.id">
       <h1>{{ project.project_name }}</h1>
       <span>{{ project.id }}</span>
     </div>
   </div>
 </template>
-
-
 
 <style scoped>
 

@@ -29,7 +29,6 @@ app.get('/', async (req, res) => {
     try {
         const result = await client.query('SELECT id, project_name FROM projects');
         const response = {data: result.rows};
-        // const response = name 
         res.json(response);
     } finally {
         client.release();
