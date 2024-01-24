@@ -17,7 +17,16 @@
     <div>
         <div v-if="!data.data">Загрузка...</div>
         <div v-else>
-            <router-link v-for="project in data.data" :key="project.id" :to="{name: 'ProjectPage', params: {id: project.id }}">{{ project.project_name }}</router-link>
+            <router-link 
+                v-for="project in data.data" 
+                :key="project.id" 
+                :to="{
+                    name: 'ProjectPage', 
+                    params: {id: project.id }
+                }"
+            >
+                {{ project.project_name }}
+            </router-link>
         </div>
 
 

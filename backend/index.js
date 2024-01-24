@@ -37,6 +37,22 @@ app.get('/', async (req, res) => {
   }
 });
 
+app.get('/tasks/:id', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    try {
+      const projectId = req.params.id;
+      const result = await client.query('SELECT * FROM tasks WHERE project_id = $1', [projectId]);
+      const response = {data: result.rows};
+      res.json(response);
+    } finally {
+      client.release();
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message});
+  }
+})
+
 app.listen(port, () => {
   console.log(`Backend is running on http://localhost:${port}`);
 });
