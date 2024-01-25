@@ -6,18 +6,20 @@
   const id = route.params.id
 
   const tasks = ref([])
+  axios.get(`/tasks/${id}`)
   // axios.get(`/api/tasks/${route.params.id}`)
-  axios.get(`/api/projects/${route.params.id}`)
   .then(response => {
     tasks.value = response.data
+    console.log(response);
   })
   .catch(error => {
     console.error(error);
+    console.error(error.response);
   })
 </script>
 
 <template>
-  <router-link to="/">Назад</router-link>
+  <!-- <router-link to="/">Назад</router-link> -->
   <div>
     {{ id }}
   </div>

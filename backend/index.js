@@ -41,15 +41,15 @@ app.get('/tasks/:id', async (req, res) => {
   try {
     const client = await pool.connect();
     try {
-      const projectId = req.params.id;
-      const result = await client.query('SELECT * FROM tasks WHERE project_id = $1', [projectId]);
-      const response = {data: result.rows};
+      const id = req.params.id;
+      const result = await client.query('SELECT * FROM tasks WHERE project_id = $1', [id]);
+      const response = { data: result.rows };
       res.json(response);
     } finally {
       client.release();
     }
   } catch (error) {
-    res.status(500).json({ message: error.message});
+    res.status(500).json({ message: error.message });
   }
 })
 

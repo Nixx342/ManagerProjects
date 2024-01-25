@@ -7,7 +7,7 @@ import ProjectList from './components/ProjectList.vue'
 <template>
   <div>
     <nav>
-      <router-link to="/">Проекты (НЕ РАБОТАЕТ РАЗОБРАТЬСЯ)</router-link>
+      <router-link to="/">Проекты</router-link>
       <!-- <router-link to="/sdflsd">ыва</router-link> -->
     </nav>
     <router-view></router-view>
