@@ -1,20 +1,19 @@
 <script setup>
   import { useRoute } from 'vue-router'
-  import { ref } from 'vue'
+  import { reactive } from 'vue'
   import axios from 'axios'
   const route = useRoute()
   const id = route.params.id
+  const tasks = reactive({data: []});
 
-  const tasks = ref([])
-  axios.get(`/tasks/${id}`)
-  // axios.get(`/api/tasks/${route.params.id}`)
+  let url = `http://localhost:3000/project/${id}`
+  // axios.get(url)
+  axios.get(`http://localhost:3000/project/${id}`)
   .then(response => {
-    tasks.value = response.data
-    console.log(response);
+    tasks.data = response.data.data
   })
   .catch(error => {
-    console.error(error);
-    console.error(error.response);
+    console.log(error)
   })
 </script>
 
@@ -24,7 +23,7 @@
     {{ id }}
   </div>
   <ul>
-    <li v-for="task in tasks" :key="task.id">
+    <li v-for="task in tasks.data" :key="task.id">
       id - "{{ task.id }}"
       project_id - "{{ task.project_id }}"
       name - "{{ task.name }}"

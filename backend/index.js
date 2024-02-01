@@ -37,7 +37,7 @@ app.get('/', async (req, res) => {
   }
 });
 
-app.get('/tasks/:id', async (req, res) => {
+app.get('/project/:id', async (req, res) => {
   try {
     const client = await pool.connect();
     try {
