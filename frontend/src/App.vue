@@ -8,7 +8,6 @@ import ProjectList from './components/ProjectList.vue'
   <div>
     <nav>
       <router-link to="/">Проекты</router-link>
-      <!-- <router-link to="/sdflsd">ыва</router-link> -->
     </nav>
     <router-view></router-view>
   </div>
