@@ -73,6 +73,27 @@ app.get('/name/:id', async (req, res) => {
   }
 })
 
+// app.get('/board/:id', async (req, res) => {
+  
+//   try {
+//     const client = await pool.connect();
+//     try {
+//       const id = req.params.id;
+//       const boards = await client.query('SELECT id, name FROM boards WHERE project_id = $1', [id]);
+
+
+
+
+//       const response = { data: boards.rows, l: boards.rows.length};
+//       res.json(response);
+//     } finally {
+//       client.release();
+//     }
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// })
+
 app.post('/addtask', async(req, res) => {
   const { name, description, priority } = req.body
   const taskId = new Date()

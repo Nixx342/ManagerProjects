@@ -1,7 +1,6 @@
 <script setup>
-import { reactive, ref } from 'vue';
-import axios from 'axios';
-import ProjectList from './components/ProjectList.vue'
+  import { reactive, ref } from 'vue'
+  import axios from 'axios'
 </script>
 
 <template>

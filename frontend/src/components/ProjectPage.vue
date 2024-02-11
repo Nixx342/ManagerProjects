@@ -2,6 +2,8 @@
   import { useRoute } from 'vue-router'
   import { reactive, ref } from 'vue'
   import axios from 'axios'
+  import DnD from './DrugAndDrop.vue'
+
   const route = useRoute()
   const id = route.params.id
   const tasks = reactive({data: []})
@@ -27,7 +29,6 @@
 
 <template>
   <div>
-    <!-- {{ name.data.project_name }} -->
     {{ name }}
   </div>
   <ul>
@@ -37,10 +38,14 @@
       name - "{{ task.name }}"
       description - "{{ task.description }}"
       priority - "{{ task.priority }}"
+      board_id - "{{ task.board_id }}"
     </li>
   </ul>
+  
+  <DnD />
+
 </template>
 
 <style scoped>
-
+  
 </style>
