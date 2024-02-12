@@ -73,26 +73,43 @@ app.get('/name/:id', async (req, res) => {
   }
 })
 
-// app.get('/board/:id', async (req, res) => {
-  
-//   try {
-//     const client = await pool.connect();
-//     try {
-//       const id = req.params.id;
-//       const boards = await client.query('SELECT id, name FROM boards WHERE project_id = $1', [id]);
+app.get('/board/:id', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    let data = [];
 
+    try {
+      const id = req.params.id;
+      const boards = await client.query('SELECT id, name FROM boards WHERE project_id = $1', [id]);
 
+      const tasksPromises = boards.rows.map(async (element) => {
+        const tasks = await client.query('SELECT * FROM tasks WHERE project_id = $1 AND board_id = $2', [id, element.id]);
+        return { name: element.name, items: tasks.rows };
+      });
 
+      const tasksResults = await Promise.all(tasksPromises);
+      data = tasksResults;
+      const response = { data: data };
+      res.json(response);
+    } finally {
+      client.release();
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-//       const response = { data: boards.rows, l: boards.rows.length};
-//       res.json(response);
-//     } finally {
-//       client.release();
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// })
+app.post('/update-task-board-id', async (req, res) => {
+  try {
+    const { taskId, newBoardId } = req.body;
+    // await client.query('UPDATE tasks SET board_id = $1 WHERE id = $2', [newBoardId, taskId]);
+    await client.query('UPDATE tasks SET board_id = $1 WHERE id = $2', [4, 1]);
+    res.status(200).json({ message: 'Task board_id updated successfully.' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 app.post('/addtask', async(req, res) => {
   const { name, description, priority } = req.body

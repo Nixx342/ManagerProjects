@@ -30,20 +30,8 @@
 <template>
   <div>
     {{ name }}
-  </div>
-  <ul>
-    <li v-for="task in tasks.data" :key="task.id">
-      id - "{{ task.id }}"
-      project_id - "{{ task.project_id }}"
-      name - "{{ task.name }}"
-      description - "{{ task.description }}"
-      priority - "{{ task.priority }}"
-      board_id - "{{ task.board_id }}"
-    </li>
-  </ul>
-  
+  </div>  
   <DnD />
-
 </template>
 
 <style scoped>
